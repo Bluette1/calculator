@@ -16,6 +16,9 @@ This project is an implementation of a calculator application using React.js.
 - React.js
 - [Big.js](https://github.com/MikeMcl/big.js/)
 
+## Deployed Site
+[Calculator on heroku](https://calculator-lite.herokuapp.com/)
+
 ## Available Scripts
 
 In the project directory, you can run:
