@@ -1,7 +1,6 @@
 # calculator
 
 [Linters](https://github.com/bluette1/calculator/workflows/Linters/badge.svg)
-![Test with jest](https://github.com/bluette1/calculator/workflows/Test%20with%20jest/badge.svg)
 
 ## Project description
 This project is an implementation of a calculator application using React.js.
