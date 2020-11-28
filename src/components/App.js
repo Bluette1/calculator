@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
@@ -6,8 +6,8 @@ function App() {
       <header className="App-header">
         <p>
           Edit
-          <code> src/App.js </code>
-          and save to reload.
+          <code> src / App.js </code>
+          and save to reload.{" "}
         </p>
         <a
           className="App-link"
@@ -15,8 +15,8 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
-        </a>
+          Learn React{" "}
+        </a>{" "}
       </header>
     </div>
   );
