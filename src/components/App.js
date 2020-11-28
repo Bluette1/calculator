@@ -1,25 +1,13 @@
-import "./App.css";
+import '../App.css';
+import ButtonPanel from './ButtonPanel';
+import buttonGroups from '../helpers/buttonGroups';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit
-          <code> src / App.js </code>
-          and save to reload.{" "}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React{" "}
-        </a>{" "}
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <div className="App">
+    {buttonGroups().forEach(btnPanel => (
+      <ButtonPanel itemList={btnPanel.itemList} id={btnPanel.key} />
+    ))}
+  </div>
+);
 
 export default App;

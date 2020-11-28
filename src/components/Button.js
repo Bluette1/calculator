@@ -1,9 +1,9 @@
-
 import React from 'react';
-const Button = (props) => {
-    return (
-      <div>
-        <p>{props.value}</p>
-      </div>
-    )
+import PropTypes from 'prop-types';
+
+const Button = props => {
+  const { value } = props;
+  return <button type="button">{value}</button>;
 };
+Button.propTypes = { value: PropTypes.string.isRequired };
+export default Button;
