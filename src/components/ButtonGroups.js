@@ -6,11 +6,11 @@ const ButtonGroups = props => {
   const { groups, id } = props;
   return (
     <div>
-      <React.Fragment key={id}>
-        {groups.forEach(btnPanel => (
+      {groups.map(btnPanel => (
+        <React.Fragment key={id}>
           <ButtonPanel itemList={btnPanel.itemList} id={btnPanel.key} />
-        ))}
-      </React.Fragment>
+        </React.Fragment>
+      ))}
     </div>
   );
 };

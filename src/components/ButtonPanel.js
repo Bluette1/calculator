@@ -6,11 +6,11 @@ const ButtonPanel = props => {
   const { itemList, id } = props;
   return (
     <div>
-      <React.Fragment key={id}>
-        {itemList.forEach(item => (
-          <Button>{item}</Button>
-        ))}
-      </React.Fragment>
+      {itemList.map(item => (
+        <React.Fragment key={id}>
+          <Button value={item} />
+        </React.Fragment>
+      ))}
     </div>
   );
 };
