@@ -5,8 +5,10 @@ import Display from './Display';
 
 const App = () => (
   <div className="App">
-    <Display />
-    <ButtonGroups groups={buttonGroups()} />
+    <>
+      <Display />
+      <ButtonGroups groups={buttonGroups()} />
+    </>
   </div>
 );
 

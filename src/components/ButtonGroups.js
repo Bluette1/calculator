@@ -7,9 +7,9 @@ const ButtonGroups = props => {
 
   return (
     <div>
-      {groups.map(btnPanel => (
-        <React.Fragment key={btnPanel.key}>
-          <ButtonPanel itemList={btnPanel.itemList} />
+      {groups.map((btnPanel, idx) => (
+        <React.Fragment key={btnPanel[`itemList${idx}`]}>
+          <ButtonPanel itemList={btnPanel[`itemList${idx}`]} />
         </React.Fragment>
       ))}
     </div>
