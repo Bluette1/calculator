@@ -1,10 +1,12 @@
 import '../App.css';
 import ButtonGroups from './ButtonGroups';
 import buttonGroups from '../helpers/buttonGroups';
+import Display from './Display';
 
 const App = () => (
   <div className="App">
-    <ButtonGroups groups={buttonGroups()} id="button-groups" />
+    <Display />
+    <ButtonGroups groups={buttonGroups()} />
   </div>
 );
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 
 const ButtonPanel = props => {
-  const { itemList} = props;
+  const { itemList } = props;
   return (
     <div>
       {itemList.map(item => (
