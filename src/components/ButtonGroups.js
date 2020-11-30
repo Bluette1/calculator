@@ -6,13 +6,11 @@ const ButtonGroups = props => {
   const { groups } = props;
 
   return (
-    <div>
-      {groups.map((btnPanel, idx) => (
-        <React.Fragment key={Object.keys(btnPanel)[0]}>
-          <ButtonPanel itemList={btnPanel[`itemList${idx}`]} />
-        </React.Fragment>
-      ))}
-    </div>
+    groups.map((btnPanel, idx) => (
+      <React.Fragment key={Object.keys(btnPanel)[0]}>
+        <ButtonPanel itemList={btnPanel[`itemList${idx}`]} />
+      </React.Fragment>
+    ))
   );
 };
 ButtonGroups.propTypes = {
