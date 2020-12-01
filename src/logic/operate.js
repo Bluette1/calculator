@@ -15,7 +15,7 @@ const operate = (numberOne, numberTwo, operation) => {
   if (operation === '÷') {
     return firstNum.div(secondNum);
   }
-  return firstNum.div(secondNum).times(100);
+  return firstNum.mod(secondNum).times(100);
 };
 
 export default operate;
