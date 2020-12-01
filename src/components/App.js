@@ -12,8 +12,6 @@ const App = () => (
   </>
 );
 
-const handleClick = () => {
-  calculate({ total: 10, next: 10, operation: '+/-' }, '+/-');
-};
+const handleClick = () => calculate({ total: 10, next: 10, operation: '+/-' }, '+/-');
 
 export { App, handleClick };
