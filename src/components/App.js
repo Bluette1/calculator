@@ -3,7 +3,7 @@ import '../App.css';
 import ButtonGroups from './ButtonGroups';
 import buttonGroups from '../helpers/buttonGroups';
 import Display from './Display';
-import calculate from '../logic/calculate'
+import calculate from '../logic/calculate';
 
 const App = () => (
   <>
@@ -12,4 +12,8 @@ const App = () => (
   </>
 );
 
-export default App;
+const handleClick = () => {
+  calculate({ total: 10, next: 10, operation: '+/-' }, '+/-');
+};
+
+export { App, handleClick };

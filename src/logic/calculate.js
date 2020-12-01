@@ -9,8 +9,8 @@ const calculate = (calculatorObj, buttonName) => {
   }
   const newCalculatorObj = { total, next, operation };
 
-  const { numberOne, numberTwo } = newCalculatorObj;
-  operate(numberOne, numberTwo, operation);
+  const { numberOne, numberTwo, theOperation } = newCalculatorObj;
+  operate(numberOne, numberTwo, theOperation);
 };
 
 export default calculate;
