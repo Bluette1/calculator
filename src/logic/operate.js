@@ -12,10 +12,10 @@ const operate = (numberOne, numberTwo, operation) => {
   if (operation === 'x') {
     return firstNum.times(secondNum);
   }
-  if (operation === '÷') {
-    return firstNum.div(secondNum);
-  }
-  return firstNum.mod(secondNum).times(100);
+
+  return firstNum.div(secondNum);
+
+;
 };
 
 export default operate;

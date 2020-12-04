@@ -4,8 +4,11 @@ const calculate = (calculatorObj, buttonName) => {
   let { total, next } = calculatorObj;
   const { operation } = calculatorObj;
   if (buttonName === '+/-') {
-    total *= -1;
-    next *= -1;
+    return total *= -1;
+  }
+
+  if (buttonName === '%') {
+    return operate(total, 100);
   }
   const newCalculatorObj = { total, next, operation };
 
