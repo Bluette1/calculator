@@ -1,6 +1,6 @@
 import operate from './operate';
 
-const calculate = (calculatorObj, buttonName) => {
+const calculate = (calculatorObj, buttonName = '') => {
   let { total, next } = calculatorObj;
   const { operation } = calculatorObj;
   if (buttonName === '+/-') {

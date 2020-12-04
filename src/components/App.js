@@ -13,10 +13,86 @@ export default class App {
       next: null,
       operation: null,
       display: '0',
-      err: null,
+      err: false,
     };
+    this.handleClick = this.handleClick.bind(this);
+    this.reset = this.reset.bind(this);
+    this.updateDisplay = this.display.bind(this);
   }
-  handleclick(){}
+  handleclick(event){
+    const {target:{value}} = event;
+    const numValue = parseInt(value, 10);
+    if (numValue === '.') {
+      if (this.total) {
+        if (!this.total.includes('.')) {
+          this.updateDisplay(value);
+        } 
+      } else {
+        this.updateDisplay('0.');
+      }
+    } else if (typeof numValue === 'number') {
+      this.updateDisplay(value);
+    } else if (value === 'AC') {
+      this.reset();
+    } else if (value === '=') {
+      total = null;
+      calcValue = calculate({
+        total: state.total, next: state.next, operation:state.operation
+      });
+      this.updateDisplay(calcValue);
+    } else if (value === '+/-' || value === '%') {
+    total = null;
+    calcValue = calculate({
+      total: state.total, next: null, operation: null
+     }, value);
+    this.updateDisplay(calcValue);
+    } else if (total) {
+     this.setState(state =>({
+       next: state.total
+     }));
+     this.setState({
+       total: null
+     });
+
+     this.setState({
+       operation: value
+     });
+    } else {
+      this.setState(state=>({
+        err: !state.err
+      }));
+    }
+
+  }
+
+  reset() {
+    this.setState({
+      total: null
+    });
+    this.setState({
+      next: null
+    });
+    this.setState({
+      next: null
+    });
+    this.setState({
+      operation: null
+    });
+    this.setState({
+      err: null
+    });
+    this.setState({
+      display: null
+    });
+
+  }
+
+  updateDisplay(value) {
+    this.setState(state=>({
+      total:  state.total ? state.total + value : value,
+      display: state.total ? state.total + value : value
+    })); 
+  }
   render() {
     return (
       <>
