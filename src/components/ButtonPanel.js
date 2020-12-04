@@ -18,6 +18,6 @@ const ButtonPanel = props => {
 ButtonPanel.propTypes = {
   itemList: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
-ButtonPanel.propTypes = { handleClick: PropTypes.func.isRequired }
+ButtonPanel.propTypes = { handleClick: PropTypes.func.isRequired };
 
 export default ButtonPanel;

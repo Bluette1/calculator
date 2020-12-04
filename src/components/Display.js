@@ -14,6 +14,10 @@ Display.defaultProps = {
   error: null,
 };
 
+Display.propTypes = {
+  result: PropTypes.string,
+  error: PropTypes.bool,
+};
+// Display.propTypes = { result: PropTypes.string };
 
-Display.propTypes = { result: PropTypes.string };
 export default Display;

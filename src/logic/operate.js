@@ -12,10 +12,7 @@ const operate = (numberOne, numberTwo, operation) => {
   if (operation === 'x') {
     return firstNum.times(secondNum);
   }
-
   return firstNum.div(secondNum);
-
-;
 };
 
 export default operate;

@@ -16,5 +16,5 @@ const ButtonGroups = props => {
 ButtonGroups.propTypes = {
   groups: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-ButtonGroups.propTypes = { onClick: PropTypes.func.isRequired }
+ButtonGroups.propTypes = { onClick: PropTypes.func.isRequired };
 export default ButtonGroups;
