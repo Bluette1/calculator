@@ -5,13 +5,24 @@ import buttonGroups from '../helpers/buttonGroups';
 import Display from './Display';
 import calculate from '../logic/calculate';
 
-const App = () => (
-  <>
-    <Display />
-    <ButtonGroups groups={buttonGroups()} />
-  </>
-);
-
-const handleClick = () => calculate({ total: 10, next: 10, operation: '+/-' }, '+/-');
-
-export { App, handleClick };
+export default class App {
+  constructor(props) {
+    super(props);
+    this.state = {
+      total: null,
+      next: null,
+      operation: null,
+      display: '0',
+      err: null,
+    };
+  }
+  handleclick(){}
+  render() {
+    return (
+      <>
+        <Display value={display} error={err} />
+        <ButtonGroups groups={buttonGroups()} />
+      </>
+    );
+  }
+};
