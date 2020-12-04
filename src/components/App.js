@@ -17,7 +17,8 @@ export default class App {
     };
     this.handleClick = this.handleClick.bind(this);
     this.reset = this.reset.bind(this);
-    this.updateDisplay = this.display.bind(this);
+    this.updateDisplay = this.updateDisplay.bind(this);
+    this.display = this.display.bind(this);
   }
   handleclick(event){
     const {target:{value}} = event;
@@ -35,13 +36,13 @@ export default class App {
     } else if (value === 'AC') {
       this.reset();
     } else if (value === '=') {
-      total = null;
+      this.total = null;
       calcValue = calculate({
         total: state.total, next: state.next, operation:state.operation
       });
       this.updateDisplay(calcValue);
     } else if (value === '+/-' || value === '%') {
-    total = null;
+    this.total = null;
     calcValue = calculate({
       total: state.total, next: null, operation: null
      }, value);
@@ -73,9 +74,6 @@ export default class App {
       next: null
     });
     this.setState({
-      next: null
-    });
-    this.setState({
       operation: null
     });
     this.setState({
@@ -90,14 +88,21 @@ export default class App {
   updateDisplay(value) {
     this.setState(state=>({
       total:  state.total ? state.total + value : value,
-      display: state.total ? state.total + value : value
     })); 
+    display();
   }
+
+  display() {
+    this.setState(state => ({
+      display: state.total
+    }));
+  }
+
   render() {
     return (
       <>
         <Display value={display} error={err} />
-        <ButtonGroups groups={buttonGroups()} />
+        <ButtonGroups groups={buttonGroups()} onClick={this.handleClick} />
       </>
     );
   }
