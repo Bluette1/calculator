@@ -25,14 +25,10 @@ export default class App extends React.Component {
     // eslint-disable-line no-console
     console.log('I was clicked!!!!!!', value);
     let {
-      state: {
-        total, next,
-      },
+      state: { total, next },
     } = this;
     const {
-      state: {
-        operation,
-      },
+      state: { operation },
     } = this;
     const numValue = parseInt(value, 10);
     if (value === '.') {
@@ -60,37 +56,43 @@ export default class App extends React.Component {
         this.display();
       });
     } else if (value === '=') {
-      console.log('total B4 App.js', total);
-      console.log('next B4 App.js', next);
-      const parsedTotal = parseInt(total, 10);
-      if (total.includes('.')) {
-        total = parseFloat(total);
-      } else {
-        total = parsedTotal;
-      }
+      if (next && total && operation) {
+        console.log('total B4 App.js', total);
+        console.log('next B4 App.js', next);
+        const parsedTotal = parseInt(total, 10);
+        if (total.includes('.')) {
+          total = parseFloat(total);
+        } else {
+          total = parsedTotal;
+        }
 
-      const parsedNext = parseInt(next, 10);
-      console.log('parsedNext!!!', parsedNext);
-      if (next.includes('.')) {
-        console.log('HERE parsedF next B4', next);
-        next = parseFloat(next);
-        console.log('HERE parsedF next Aft', next);
-      } else {
-        next = parsedNext;
+        const parsedNext = parseInt(next, 10);
+        console.log('parsedNext!!!', parsedNext);
+        if (next.includes('.')) {
+          console.log('HERE parsedF next B4', next);
+          next = parseFloat(next);
+          console.log('HERE parsedF next Aft', next);
+        } else {
+          next = parsedNext;
+        }
+        console.log('total App.js', total);
+        console.log('next App.js', next);
+        const calcValue = calculate({
+          total,
+          next,
+          operation,
+        });
+        this.setState({
+          total: null,
+        });
+        this.updateDisplay(`${calcValue}`, () => {
+          this.display();
+        });
+      } else if (next && operation && !total) {
+        this.setState({
+          err: true,
+        });
       }
-      console.log('total App.js', total);
-      console.log('next App.js', next);
-      const calcValue = calculate({
-        total,
-        next,
-        operation,
-      });
-      this.setState({
-        total: null,
-      });
-      this.updateDisplay(`${calcValue}`, () => {
-        this.display();
-      });
     } else if (value === '+/-' || value === '%') {
       total = null;
       const calcValue = calculate(
@@ -116,9 +118,9 @@ export default class App extends React.Component {
         operation: value,
       });
     } else {
-      this.setState(state => ({
-        err: !state.err,
-      }));
+      this.setState({
+        err: true,
+      });
     }
   }
 
@@ -142,16 +144,17 @@ export default class App extends React.Component {
   }
 
   updateDisplay(value, callback) {
-    this.setState(state => ({
-      total: state.total ? state.total + value : value,
-    }), callback);
+    this.setState(
+      state => ({
+        total: state.total ? state.total + value : value,
+      }),
+      callback,
+    );
   }
 
   display() {
     const {
-      state: {
-        total,
-      },
+      state: { total },
     } = this;
     // eslint-disable-line no-console
     console.log('we are here00000TOTAL!!', total);
