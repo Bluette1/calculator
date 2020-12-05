@@ -38,15 +38,10 @@ export default class App extends React.Component {
           });
         }
       } else {
-        if (total && done) {
-          // this.setState({
-          //   total: null,
-          //   done: false,
-          //   next: null,
-          // });
-          // this.reset(() => {
-          // this.display();
-          // });
+        if (total && done && !operation) {
+          this.reset(() => {
+            this.display();
+          });
         }
         this.updateDisplay('0.', () => {
           this.display();
@@ -54,11 +49,6 @@ export default class App extends React.Component {
       }
     } else if (!Number.isNaN(numValue)) {
       if (done && !operation) {
-        // this.setState({
-        //   total: null,
-        //   done: false,
-        //   next: null,
-        // });
         this.reset(() => {
           this.display();
         });
@@ -93,7 +83,6 @@ export default class App extends React.Component {
           done: true,
           total: null,
           operation: null,
-          // next: null,
         });
         this.updateDisplay(`${calcValue}`, () => {
           this.display();
@@ -122,7 +111,6 @@ export default class App extends React.Component {
         this.setState({
           done: true,
           total: null,
-          // next: null,
         });
         this.updateDisplay(`${calcValue}`, () => {
           this.display();
