@@ -83,8 +83,6 @@ export default class App extends React.Component {
         });
         this.setState({
           done: true,
-        });
-        this.setState({
           total: null,
         });
         this.updateDisplay(`${calcValue}`, () => {
@@ -96,37 +94,51 @@ export default class App extends React.Component {
         });
       }
     } else if (value === '+/-' || value === '%') {
-      const parsedTotal = parseInt(total, 10);
-      if (total.includes('.')) {
-        total = parseFloat(total);
-      } else {
-        total = parsedTotal;
+      if (total) {
+        const parsedTotal = parseInt(total, 10);
+        if (total.includes('.')) {
+          total = parseFloat(total);
+        } else {
+          total = parsedTotal;
+        }
+        const calcValue = calculate(
+          {
+            total,
+            next: null,
+            operation: null,
+          },
+          value,
+        );
+        this.setState({
+          done: true,
+          total: null,
+        });
+        this.updateDisplay(`${calcValue}`, () => {
+          this.display();
+        });
+      } else if (next) {
+        const parsedNext = parseInt(next, 10);
+        if (next.includes('.')) {
+          next = parseFloat(next);
+        } else {
+          next = parsedNext;
+        }
+        const calcValue = calculate(
+          {
+            total: null,
+            next,
+            operation,
+          },
+          value,
+        );
+        this.setState({ next: `${calcValue}`, display: `${calcValue}` });
       }
-      const calcValue = calculate(
-        {
-          total,
-          next: null,
-          operation: null,
-        },
-        value,
-      );
-      this.setState({
-        total: null,
-      });
-      this.updateDisplay(`${calcValue}`, () => {
-        this.display();
-      });
     } else if (total) {
       this.setState(state => ({
         next: state.total,
-      }));
-      this.setState({
         total: null,
-      });
-
-      this.setState({
         operation: value,
-      });
+      }));
     } else {
       this.setState({
         err: true,
@@ -137,17 +149,9 @@ export default class App extends React.Component {
   reset(callback) {
     this.setState({
       total: null,
-    });
-    this.setState({
       next: null,
-    });
-    this.setState({
       operation: null,
-    });
-    this.setState({
       err: null,
-    });
-    this.setState({
       display: null,
     });
     callback();
@@ -163,9 +167,6 @@ export default class App extends React.Component {
   }
 
   display() {
-    const {
-      state: { total },
-    } = this;
     this.setState(state => ({
       display: state.total ? state.total : '0',
     }));
