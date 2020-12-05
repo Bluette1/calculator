@@ -21,10 +21,8 @@ export default class App extends React.Component {
     this.display = this.display.bind(this);
   }
 
-  handleClick(event) {
-    const {
-      target: { value },
-    } = event;
+  handleClick(value) {
+    console.log('I was clicked!!!!!!', value);
     let {
       state: {
         total,
@@ -123,7 +121,7 @@ export default class App extends React.Component {
     return (
       <>
         <Display value={display} error={err} />
-        <ButtonGroups groups={buttonGroups()} onClick={this.handleClick} />
+        <ButtonGroups groups={buttonGroups()} onclick={this.handleClick} />
       </>
     );
   }

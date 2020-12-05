@@ -5,19 +5,18 @@ const Display = props => {
   const { result, error } = props;
   let display = result;
   if (error) {
-    display = error;
+    display = 'Error!';
   }
   return <div className="display">{display}</div>;
 };
 Display.defaultProps = {
   result: '0',
-  error: null,
+  error: false,
 };
 
 Display.propTypes = {
   result: PropTypes.string,
   error: PropTypes.bool,
 };
-// Display.propTypes = { result: PropTypes.string };
 
 export default Display;
