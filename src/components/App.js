@@ -23,8 +23,6 @@ export default class App extends React.Component {
   }
 
   handleClick(value) {
-    // eslint-disable-line no-console
-    console.log('I was clicked!!!!!!', value);
     let {
       state: { total, next },
     } = this;
@@ -57,39 +55,27 @@ export default class App extends React.Component {
           done: false,
         });
       }
-      // eslint-disable-line no-console
-      console.log('Here::: number!!!!!!!', numValue);
       this.updateDisplay(value, () => {
         this.display();
       });
     } else if (value === 'AC') {
-      // eslint-disable-line no-console
-      console.log('Here:::AC');
       this.reset(() => {
         this.display();
       });
     } else if (value === '=') {
       if (next && total && operation) {
-        console.log('total B4 App.js', total);
-        console.log('next B4 App.js', next);
         const parsedTotal = parseInt(total, 10);
         if (total.includes('.')) {
           total = parseFloat(total);
         } else {
           total = parsedTotal;
         }
-
         const parsedNext = parseInt(next, 10);
-        console.log('parsedNext!!!', parsedNext);
         if (next.includes('.')) {
-          console.log('HERE parsedF next B4', next);
           next = parseFloat(next);
-          console.log('HERE parsedF next Aft', next);
         } else {
           next = parsedNext;
         }
-        console.log('total App.js', total);
-        console.log('next App.js', next);
         const calcValue = calculate({
           total,
           next,
@@ -180,9 +166,6 @@ export default class App extends React.Component {
     const {
       state: { total },
     } = this;
-    // eslint-disable-line no-console
-    console.log('we are here00000TOTAL!!', total);
-    console.log('we are here inside display()');
     this.setState(state => ({
       display: state.total ? state.total : '0',
     }));
@@ -192,8 +175,6 @@ export default class App extends React.Component {
     const {
       state: { display, err },
     } = this;
-    // eslint-disable-line no-console
-    console.log('we are here0001122', display);
     return (
       <>
         <Display result={display} error={err} />
