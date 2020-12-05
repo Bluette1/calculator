@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import ButtonGroups from './ButtonGroups';
 import buttonGroups from '../helpers/buttonGroups';
+import parseNum from '../helpers/parseNum';
 import Display from './Display';
 import calculate from '../logic/calculate';
 
@@ -43,9 +44,15 @@ export default class App extends React.Component {
             this.display();
           });
         }
-        this.updateDisplay('0.', () => {
-          this.display();
-        });
+        if (total && operation) {
+          this.updateDisplay('.', () => {
+            this.display();
+          });
+        } else {
+          this.updateDisplay('0.', () => {
+            this.display();
+          });
+        }
       }
     } else if (!Number.isNaN(numValue)) {
       if (done && !operation) {
@@ -62,18 +69,8 @@ export default class App extends React.Component {
       });
     } else if (value === '=') {
       if (next && total && operation) {
-        const parsedTotal = parseInt(total, 10);
-        if (total.includes('.')) {
-          total = parseFloat(total);
-        } else {
-          total = parsedTotal;
-        }
-        const parsedNext = parseInt(next, 10);
-        if (next.includes('.')) {
-          next = parseFloat(next);
-        } else {
-          next = parsedNext;
-        }
+        total = parseNum(total);
+        next = parseNum(next);
         const calcValue = calculate({
           total,
           next,
@@ -94,12 +91,7 @@ export default class App extends React.Component {
       }
     } else if (value === '+/-' || value === '%') {
       if (total) {
-        const parsedTotal = parseInt(total, 10);
-        if (total.includes('.')) {
-          total = parseFloat(total);
-        } else {
-          total = parsedTotal;
-        }
+        total = parseNum(total);
         const calcValue = calculate(
           {
             total,
@@ -116,12 +108,7 @@ export default class App extends React.Component {
           this.display();
         });
       } else if (next) {
-        const parsedNext = parseInt(next, 10);
-        if (next.includes('.')) {
-          next = parseFloat(next);
-        } else {
-          next = parsedNext;
-        }
+        next = parseNum(next);
         const calcValue = calculate(
           {
             total: null,
