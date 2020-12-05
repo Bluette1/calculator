@@ -35,7 +35,7 @@ export default class App extends React.Component {
       },
     } = this;
     const numValue = parseInt(value, 10);
-    if (numValue === '.') {
+    if (value === '.') {
       if (total) {
         if (!total.includes('.')) {
           this.updateDisplay(value, () => {
@@ -47,12 +47,18 @@ export default class App extends React.Component {
           this.display();
         });
       }
-    } else if (typeof numValue === 'number') {
+    } else if (!Number.isNaN(numValue)) {
+      // eslint-disable-line no-console
+      console.log('Here::: number!!!!!!!', numValue);
       this.updateDisplay(value, () => {
         this.display();
       });
     } else if (value === 'AC') {
-      this.reset();
+      // eslint-disable-line no-console
+      console.log('Here:::AC');
+      this.reset(() => {
+        this.display();
+      });
     } else if (value === '=') {
       total = null;
       const calcValue = calculate({
@@ -94,7 +100,7 @@ export default class App extends React.Component {
     }
   }
 
-  reset() {
+  reset(callback) {
     this.setState({
       total: null,
     });
@@ -110,6 +116,7 @@ export default class App extends React.Component {
     this.setState({
       display: null,
     });
+    callback();
   }
 
   updateDisplay(value, callback) {
@@ -128,7 +135,7 @@ export default class App extends React.Component {
     console.log('we are here00000TOTAL!!', total);
     console.log('we are here inside display()');
     this.setState(state => ({
-      display: state.total,
+      display: state.total ? state.total : '0',
     }));
   }
 
