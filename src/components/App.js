@@ -14,6 +14,7 @@ export default class App extends React.Component {
       operation: null,
       display: '0',
       err: false,
+      done: false,
     };
     this.handleClick = this.handleClick.bind(this);
     this.reset = this.reset.bind(this);
@@ -28,22 +29,34 @@ export default class App extends React.Component {
       state: { total, next },
     } = this;
     const {
-      state: { operation },
+      state: { operation, done },
     } = this;
     const numValue = parseInt(value, 10);
     if (value === '.') {
-      if (total) {
+      if (total && !done) {
         if (!total.includes('.')) {
           this.updateDisplay(value, () => {
             this.display();
           });
         }
       } else {
+        if (total && done) {
+          this.setState({
+            total: null,
+            done: false,
+          });
+        }
         this.updateDisplay('0.', () => {
           this.display();
         });
       }
     } else if (!Number.isNaN(numValue)) {
+      if (done) {
+        this.setState({
+          total: null,
+          done: false,
+        });
+      }
       // eslint-disable-line no-console
       console.log('Here::: number!!!!!!!', numValue);
       this.updateDisplay(value, () => {
@@ -81,6 +94,9 @@ export default class App extends React.Component {
           total,
           next,
           operation,
+        });
+        this.setState({
+          done: true,
         });
         this.setState({
           total: null,
