@@ -22,6 +22,7 @@ export default class App extends React.Component {
   }
 
   handleClick(value) {
+    // eslint-disable-line no-console
     console.log('I was clicked!!!!!!', value);
     let {
       state: {
@@ -37,13 +38,19 @@ export default class App extends React.Component {
     if (numValue === '.') {
       if (total) {
         if (!total.includes('.')) {
-          this.updateDisplay(value);
+          this.updateDisplay(value, () => {
+            this.display();
+          });
         }
       } else {
-        this.updateDisplay('0.');
+        this.updateDisplay('0.', () => {
+          this.display();
+        });
       }
     } else if (typeof numValue === 'number') {
-      this.updateDisplay(value);
+      this.updateDisplay(value, () => {
+        this.display();
+      });
     } else if (value === 'AC') {
       this.reset();
     } else if (value === '=') {
@@ -53,7 +60,9 @@ export default class App extends React.Component {
         next,
         operation,
       });
-      this.updateDisplay(calcValue);
+      this.updateDisplay(calcValue, () => {
+        this.display();
+      });
     } else if (value === '+/-' || value === '%') {
       total = null;
       const calcValue = calculate(
@@ -64,7 +73,9 @@ export default class App extends React.Component {
         },
         value,
       );
-      this.updateDisplay(calcValue);
+      this.updateDisplay(calcValue, () => {
+        this.display();
+      });
     } else if (total) {
       this.setState(state => ({
         next: state.total,
@@ -101,14 +112,21 @@ export default class App extends React.Component {
     });
   }
 
-  updateDisplay(value) {
+  updateDisplay(value, callback) {
     this.setState(state => ({
       total: state.total ? state.total + value : value,
-    }));
-    this.display();
+    }), callback);
   }
 
   display() {
+    const {
+      state: {
+        total,
+      },
+    } = this;
+    // eslint-disable-line no-console
+    console.log('we are here00000TOTAL!!', total);
+    console.log('we are here inside display()');
     this.setState(state => ({
       display: state.total,
     }));
@@ -118,9 +136,11 @@ export default class App extends React.Component {
     const {
       state: { display, err },
     } = this;
+    // eslint-disable-line no-console
+    console.log('we are here0001122', display);
     return (
       <>
-        <Display value={display} error={err} />
+        <Display result={display} error={err} />
         <ButtonGroups groups={buttonGroups()} onclick={this.handleClick} />
       </>
     );
