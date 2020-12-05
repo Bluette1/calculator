@@ -94,7 +94,12 @@ export default class App extends React.Component {
         });
       }
     } else if (value === '+/-' || value === '%') {
-      total = null;
+      const parsedTotal = parseInt(total, 10);
+      if (total.includes('.')) {
+        total = parseFloat(total);
+      } else {
+        total = parsedTotal;
+      }
       const calcValue = calculate(
         {
           total,
@@ -103,7 +108,10 @@ export default class App extends React.Component {
         },
         value,
       );
-      this.updateDisplay(calcValue, () => {
+      this.setState({
+        total: null,
+      });
+      this.updateDisplay(`${calcValue}`, () => {
         this.display();
       });
     } else if (total) {

@@ -7,7 +7,7 @@ const calculate = (calculatorObj, buttonName = '') => {
   }
 
   if (buttonName === '%') {
-    return operate(total, 100);
+    return operate(100, total);
   }
   return operate(total, next, operation);
 };
