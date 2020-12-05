@@ -9,10 +9,7 @@ const calculate = (calculatorObj, buttonName = '') => {
   if (buttonName === '%') {
     return operate(total, 100);
   }
-  const newCalculatorObj = { total, next, operation };
-
-  const { numberOne, numberTwo, theOperation } = newCalculatorObj;
-  return operate(numberOne, numberTwo, theOperation);
+  return operate(total, next, operation);
 };
 
 export default calculate;

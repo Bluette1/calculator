@@ -1,6 +1,9 @@
 import Big from 'big.js';
 
 const operate = (numberOne, numberTwo, operation) => {
+  // eslint-disable-line no-console
+  console.log('numberOne:::', numberOne);
+  console.log('numberTwo:::', numberTwo);
   const firstNum = new Big(numberOne);
   const secondNum = new Big(numberTwo);
   if (operation === '+') {

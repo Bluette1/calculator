@@ -26,12 +26,12 @@ export default class App extends React.Component {
     console.log('I was clicked!!!!!!', value);
     let {
       state: {
-        total,
+        total, next,
       },
     } = this;
     const {
       state: {
-        operation, next,
+        operation,
       },
     } = this;
     const numValue = parseInt(value, 10);
@@ -60,13 +60,30 @@ export default class App extends React.Component {
         this.display();
       });
     } else if (value === '=') {
-      total = null;
+      const parsedTotal = parseInt(total, 10);
+      if (Number.isNaN(parsedTotal)) {
+        total = parseFloat(total);
+      } else {
+        total = parsedTotal;
+      }
+
+      const parsedNext = parseInt(next, 10);
+      if (Number.isNaN(parsedNext)) {
+        next = parseFloat(next);
+      } else {
+        next = parsedNext;
+      }
+      console.log('total App.js', total);
+      console.log('next App.js', next);
       const calcValue = calculate({
         total,
         next,
         operation,
       });
-      this.updateDisplay(calcValue, () => {
+      this.setState({
+        total: null,
+      });
+      this.updateDisplay(`${calcValue}`, () => {
         this.display();
       });
     } else if (value === '+/-' || value === '%') {
