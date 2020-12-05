@@ -60,16 +60,21 @@ export default class App extends React.Component {
         this.display();
       });
     } else if (value === '=') {
+      console.log('total B4 App.js', total);
+      console.log('next B4 App.js', next);
       const parsedTotal = parseInt(total, 10);
-      if (Number.isNaN(parsedTotal)) {
+      if (total.includes('.')) {
         total = parseFloat(total);
       } else {
         total = parsedTotal;
       }
 
       const parsedNext = parseInt(next, 10);
-      if (Number.isNaN(parsedNext)) {
+      console.log('parsedNext!!!', parsedNext);
+      if (next.includes('.')) {
+        console.log('HERE parsedF next B4', next);
         next = parseFloat(next);
+        console.log('HERE parsedF next Aft', next);
       } else {
         next = parsedNext;
       }
