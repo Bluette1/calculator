@@ -6,7 +6,6 @@ import parseNum from '../helpers/parseNum';
 import Display from './Display';
 import calculate from '../logic/calculate';
 
-/* eslint-disable no-console */
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -57,16 +56,10 @@ export default class App extends React.Component {
       }
     } else if (!Number.isNaN(numValue)) {
       if (done && !operation) {
-        console.log('I am here.......NUM', value);
         this.reset(() => {
           this.display();
         });
       }
-      // else if (!total && !operation) {
-      //   this.updateDisplay(value, () => {
-      //     this.display();
-      //   });
-      // }
       this.updateDisplay(value, () => {
         this.display();
       });
@@ -75,15 +68,9 @@ export default class App extends React.Component {
         this.display();
       });
     } else if (next && total) {
-      console.log('I am here.......NEXT && TOTAL', value);
-
       total = parseNum(total);
       next = parseNum(next);
       if (value === '=') {
-        console.log('I am here.......NEXT && TOTAL =', value);
-        console.log('I am here.......NEXT && TOTAL = TOTAL', total);
-        console.log('I am here.......NEXT && TOTAL = NEXT', next);
-
         const calcValue = calculate({
           total,
           next,
@@ -99,7 +86,6 @@ export default class App extends React.Component {
           this.display();
         });
       } else if (value !== '+/-' && value !== '%') {
-        console.log('I am here.......NEXT && TOTAL +/- %', value);
         const calcValue = calculate({
           total,
           next,
@@ -145,29 +131,12 @@ export default class App extends React.Component {
         this.setState({ next: `${calcValue}`, display: `${calcValue}` });
       }
     } else if (total) {
-      // if (next) {
-      //   total = parseNum(total);
-      //   next = parseNum(next);
-      //   const calcValue = calculate({
-      //     total,
-      //     next,
-      //     operation,
-      //   });
-      // this.setState({
-      //   next: `${calcValue}`,
-      //   total: null,
-      //   operation: null,
-      // });
-      // }
-      // else {
-
       this.setState(state => ({
         next: state.total,
         total: null,
         operation: value,
       }));
-      // }
-    } else {
+    } else if (value !== '%' && value !== '=') {
       this.setState({
         err: true,
       });
