@@ -3,7 +3,7 @@
 [Linters](https://github.com/bluette1/calculator/workflows/Linters/badge.svg)
 
 ## Project description
-This project is an implementation of a calculator application using React.js.
+This project is an implementation of a basic 4-function calculator application using React.js.
 ## Screenshot
 ![demo picture](./assets/screenshot.png)
 
@@ -16,7 +16,7 @@ This project is an implementation of a calculator application using React.js.
 - [Big.js](https://github.com/MikeMcl/big.js/)
 
 ## Deployed Site
-[Calculator on heroku](https://calculator-lite.herokuapp.com/)
+[Calculator on heroku](https://mcalc-app.herokuapp.com/)
 
 ## Available Scripts
 
@@ -86,7 +86,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 ## Features
-- The user can access the basic arithmetic functions of a simple calculator.
+- The user can access the basic arithmetic functions of a simple calculator: addition, subtraction, division and multiplication, including the following functions:
+  - AC(All Clear) = clear all and start a new operation
+  - +/-(Plus/Minus) = change the sign of the displayed value from positive to negative or vice versa
+  - %(Percent) = use displayed value to calculate a percentage
+
+
 
 ## Contributions
 

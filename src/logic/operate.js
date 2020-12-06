@@ -7,15 +7,12 @@ const operate = (numberOne, numberTwo, operation) => {
     return firstNum.plus(secondNum);
   }
   if (operation === '-') {
-    return firstNum.minus(secondNum);
+    return secondNum.minus(firstNum);
   }
   if (operation === 'x') {
     return firstNum.times(secondNum);
   }
-  if (operation === '÷') {
-    return firstNum.div(secondNum);
-  }
-  return firstNum.mod(secondNum).times(100);
+  return secondNum.div(firstNum);
 };
 
 export default operate;

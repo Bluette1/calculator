@@ -1,16 +1,20 @@
 import operate from './operate';
 
-const calculate = (calculatorObj, buttonName) => {
-  let { total, next } = calculatorObj;
-  const { operation } = calculatorObj;
+const calculate = (calculatorObj, buttonName = '') => {
+  const { total, next, operation } = calculatorObj;
   if (buttonName === '+/-') {
-    total *= -1;
-    next *= -1;
+    if (total) {
+      return total * -1;
+    }
+    return next * -1;
   }
-  const newCalculatorObj = { total, next, operation };
-
-  const { numberOne, numberTwo, theOperation } = newCalculatorObj;
-  operate(numberOne, numberTwo, theOperation);
+  if (buttonName === '%') {
+    if (total) {
+      return operate(100, total);
+    }
+    return operate(100, next);
+  }
+  return operate(total, next, operation);
 };
 
 export default calculate;
