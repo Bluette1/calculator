@@ -14,9 +14,6 @@ const calculate = (calculatorObj, buttonName = '') => {
     }
     return operate(100, next);
   }
-  console.log('Operate: Total', total);
-  console.log('Operate: Next', next);
-  console.log('Operate: Operation', operation);
   return operate(total, next, operation);
 };
 
