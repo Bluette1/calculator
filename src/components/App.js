@@ -60,6 +60,11 @@ export default class App extends React.Component {
           this.display();
         });
       }
+      // else if (!total && !operation) {
+      //   this.updateDisplay(value, () => {
+      //     this.display();
+      //   });
+      // }
       this.updateDisplay(value, () => {
         this.display();
       });
@@ -67,10 +72,10 @@ export default class App extends React.Component {
       this.reset(() => {
         this.display();
       });
-    } else if (value === '=') {
-      if (next && total && operation) {
-        total = parseNum(total);
-        next = parseNum(next);
+    } else if (next && total) {
+      total = parseNum(total);
+      next = parseNum(next);
+      if (value === '=' && operation) {
         const calcValue = calculate({
           total,
           next,
@@ -84,11 +89,32 @@ export default class App extends React.Component {
         this.updateDisplay(`${calcValue}`, () => {
           this.display();
         });
-      } else if (next && operation && !total) {
+      } else if (value !== '+/-' && value !== '%') {
+        const calcValue = calculate({
+          total,
+          next,
+          operation: value,
+        });
         this.setState({
-          err: true,
+          next: `${calcValue}`,
+          total: null,
+          operation: null,
+        });
+        this.setState({
+          display: `${calcValue}`,
         });
       }
+      // this.setState({
+      //   done: true,
+      //   total: null,
+      //   operation: null,
+      // });
+      // this.updateDisplay(`${calcValue}`, () => {
+      //   this.display();
+      //   // this.setState({
+      //   //   // total: null,
+      //   // });
+      // });
     } else if (value === '+/-' || value === '%') {
       if (total) {
         total = parseNum(total);
@@ -96,7 +122,7 @@ export default class App extends React.Component {
           {
             total,
             next: null,
-            operation: null,
+            operation,
           },
           value,
         );
@@ -113,18 +139,35 @@ export default class App extends React.Component {
           {
             total: null,
             next,
-            operation,
+            operation: null,
           },
           value,
         );
         this.setState({ next: `${calcValue}`, display: `${calcValue}` });
       }
     } else if (total) {
+      // if (next) {
+      //   total = parseNum(total);
+      //   next = parseNum(next);
+      //   const calcValue = calculate({
+      //     total,
+      //     next,
+      //     operation,
+      //   });
+      // this.setState({
+      //   next: `${calcValue}`,
+      //   total: null,
+      //   operation: null,
+      // });
+      // }
+      // else {
+
       this.setState(state => ({
         next: state.total,
         total: null,
         operation: value,
       }));
+      // }
     } else {
       this.setState({
         err: true,
