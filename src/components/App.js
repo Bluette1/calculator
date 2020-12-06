@@ -6,6 +6,7 @@ import parseNum from '../helpers/parseNum';
 import Display from './Display';
 import calculate from '../logic/calculate';
 
+/* eslint-disable no-console */
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -56,6 +57,7 @@ export default class App extends React.Component {
       }
     } else if (!Number.isNaN(numValue)) {
       if (done && !operation) {
+        console.log('I am here.......NUM', value);
         this.reset(() => {
           this.display();
         });
@@ -73,9 +75,15 @@ export default class App extends React.Component {
         this.display();
       });
     } else if (next && total) {
+      console.log('I am here.......NEXT && TOTAL', value);
+
       total = parseNum(total);
       next = parseNum(next);
-      if (value === '=' && operation) {
+      if (value === '=') {
+        console.log('I am here.......NEXT && TOTAL =', value);
+        console.log('I am here.......NEXT && TOTAL = TOTAL', total);
+        console.log('I am here.......NEXT && TOTAL = NEXT', next);
+
         const calcValue = calculate({
           total,
           next,
@@ -85,11 +93,13 @@ export default class App extends React.Component {
           done: true,
           total: null,
           operation: null,
+          next: null,
         });
         this.updateDisplay(`${calcValue}`, () => {
           this.display();
         });
       } else if (value !== '+/-' && value !== '%') {
+        console.log('I am here.......NEXT && TOTAL +/- %', value);
         const calcValue = calculate({
           total,
           next,
@@ -98,23 +108,12 @@ export default class App extends React.Component {
         this.setState({
           next: `${calcValue}`,
           total: null,
-          operation: null,
+          // operation: null,
         });
         this.setState({
           display: `${calcValue}`,
         });
       }
-      // this.setState({
-      //   done: true,
-      //   total: null,
-      //   operation: null,
-      // });
-      // this.updateDisplay(`${calcValue}`, () => {
-      //   this.display();
-      //   // this.setState({
-      //   //   // total: null,
-      //   // });
-      // });
     } else if (value === '+/-' || value === '%') {
       if (total) {
         total = parseNum(total);
