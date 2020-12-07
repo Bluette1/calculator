@@ -67,39 +67,6 @@ export default class App extends React.Component {
       this.reset(() => {
         this.display();
       });
-    } else if (next && total) {
-      total = parseNum(total);
-      next = parseNum(next);
-      if (value === '=') {
-        const calcValue = calculate({
-          total,
-          next,
-          operation,
-        });
-        this.setState({
-          done: true,
-          total: null,
-          operation: null,
-          next: null,
-        });
-        this.updateDisplay(`${calcValue}`, () => {
-          this.display();
-        });
-      } else if (value !== '+/-' && value !== '%') {
-        const calcValue = calculate({
-          total,
-          next,
-          operation: value,
-        });
-        this.setState({
-          next: `${calcValue}`,
-          total: null,
-          // operation: null,
-        });
-        this.setState({
-          display: `${calcValue}`,
-        });
-      }
     } else if (value === '+/-' || value === '%') {
       if (total) {
         total = parseNum(total);
@@ -129,6 +96,38 @@ export default class App extends React.Component {
           value,
         );
         this.setState({ next: `${calcValue}`, display: `${calcValue}` });
+      }
+    } else if (next && total) {
+      total = parseNum(total);
+      next = parseNum(next);
+      if (value === '=') {
+        const calcValue = calculate({
+          total,
+          next,
+          operation,
+        });
+        this.setState({
+          done: true,
+          total: null,
+          operation: null,
+          next: null,
+        });
+        this.updateDisplay(`${calcValue}`, () => {
+          this.display();
+        });
+      } else if (value !== '+/-' && value !== '%') {
+        const calcValue = calculate({
+          total,
+          next,
+          operation: value,
+        });
+        this.setState({
+          next: `${calcValue}`,
+          total: null,
+        });
+        this.setState({
+          display: `${calcValue}`,
+        });
       }
     } else if (total) {
       this.setState(state => ({
