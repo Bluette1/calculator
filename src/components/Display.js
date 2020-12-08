@@ -5,7 +5,7 @@ const Display = props => {
   const { result, error } = props;
   let display = result;
   if (error) {
-    display = 'Error!';
+    display = '\u26A0';
   }
   return <div className="display">{display}</div>;
 };
