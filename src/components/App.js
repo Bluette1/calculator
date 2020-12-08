@@ -29,6 +29,9 @@ const App = () => {
   };
 
   const handleClick = value => {
+    if (err) {
+      reset();
+    }
     const numValue = parseInt(value, 10);
     if (value === '.') {
       if (total && !done) {
@@ -106,11 +109,13 @@ const App = () => {
         setTotal(null);
         setDisplay(`${calcValue}`);
       }
-    } else if (total) {
+    } else if (total && value !== '=') {
       setNext(total);
       setTotal(null);
       setOperation(value);
-    } else if (value !== '%' && value !== '=') {
+    } else if (value === '=') {
+      setOperation(null);
+    } else {
       setErr(true);
     }
   };
