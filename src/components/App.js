@@ -13,6 +13,7 @@ const App = () => {
   const [display, setDisplay] = useState('0');
   const [err, setErr] = useState(false);
   const [done, setDone] = useState(false);
+  const [buttonName, setButtonName] = useState(null);
 
   const reset = () => {
     setTotal(null);
@@ -55,13 +56,28 @@ const App = () => {
       } else if (total) {
         updateDisplay(`${total}${value}`);
       } else {
-        updateDisplay(`${value}`);
+        let displayValue = value;
+        if (buttonName) {
+          const parsedValue = parseNum(value);
+          displayValue = calculate(
+            {
+              total: parsedValue,
+              next,
+              operation,
+            },
+            '+/-',
+          );
+          setButtonName(null);
+        }
+        updateDisplay(`${displayValue}`);
       }
     } else if (value === 'AC') {
       reset();
       setDisplay('0');
     } else if (value === '+/-' || value === '%') {
-      if (total) {
+      if (value === '+/-' && operation && !total) {
+        setButtonName('+/-');
+      } else if (total) {
         const parsedTotal = parseNum(total);
         const calcValue = calculate(
           {
@@ -79,7 +95,7 @@ const App = () => {
           {
             total: null,
             next: parsedNext,
-            operation: null,
+            operation,
           },
           value,
         );
