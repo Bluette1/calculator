@@ -75,7 +75,7 @@ const App = () => {
       reset();
       setDisplay('0');
     } else if (value === '+/-' || value === '%') {
-      if (operation && !total) {
+      if (value === '+/-' && operation && !total) {
         setButtonName(value);
       } else if (total) {
         const parsedTotal = parseNum(total);
