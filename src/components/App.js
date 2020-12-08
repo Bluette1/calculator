@@ -65,7 +65,7 @@ const App = () => {
               next,
               operation,
             },
-            '+/-',
+            buttonName,
           );
           setButtonName(null);
         }
@@ -75,8 +75,8 @@ const App = () => {
       reset();
       setDisplay('0');
     } else if (value === '+/-' || value === '%') {
-      if (value === '+/-' && operation && !total) {
-        setButtonName('+/-');
+      if (operation && !total) {
+        setButtonName(value);
       } else if (total) {
         const parsedTotal = parseNum(total);
         const calcValue = calculate(
