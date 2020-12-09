@@ -30,12 +30,18 @@ body {
 .navbar ul {
   display: flex;
   flex-flow: row wrap;
+  list-style-type: none;
 }
 
 .navbar li {
   flex-basis: auto;
   flex-grow: 1;
   width: 15%;
+  padding-right: 20px;
+}
+
+.navbar li:nth-child(2) {
+  padding-left: 22px;
 }
 
 .home {
@@ -48,6 +54,7 @@ body {
 
 .quote {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
