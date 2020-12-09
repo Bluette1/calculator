@@ -21,3 +21,33 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar ul {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.navbar li {
+  flex-basis: auto;
+  flex-grow: 1;
+  width: 15%;
+}
+
+.home {
+  text-align: justify;
+}
+
+.home h1 {
+  text-align: center;
+}
+
+.quote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
