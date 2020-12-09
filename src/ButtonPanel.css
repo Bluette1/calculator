@@ -1,0 +1,9 @@
+.buttonGroup {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100px;
+}
+
+.buttonGroup button:last-child {
+  /* background-color: #ff7b00; */
+}

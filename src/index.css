@@ -1,5 +1,11 @@
+@import-normalize; /* bring in normalize.css styles */
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 30px;
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -14,14 +20,4 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family:
-    source-code-pro,
-    Menlo,
-    Monaco,
-    Consolas,
-    'Courier New',
-    monospace;
 }

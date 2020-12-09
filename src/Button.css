@@ -1,0 +1,6 @@
+button {
+  flex-grow: 1;
+  flex-basis: auto;
+  font-size: 30px;
+  border: 1px solid rgb(170, 167, 167);
+}
