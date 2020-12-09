@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import ButtonGroups from './ButtonGroups';
 import buttonGroups from '../helpers/buttonGroups';
@@ -6,178 +6,142 @@ import parseNum from '../helpers/parseNum';
 import Display from './Display';
 import calculate from '../logic/calculate';
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      total: null,
-      next: null,
-      operation: null,
-      display: '0',
-      err: false,
-      done: false,
-    };
-    this.handleClick = this.handleClick.bind(this);
-    this.reset = this.reset.bind(this);
-    this.updateDisplay = this.updateDisplay.bind(this);
-    this.display = this.display.bind(this);
-  }
+const App = () => {
+  const [total, setTotal] = useState(null);
+  const [next, setNext] = useState(null);
+  const [operation, setOperation] = useState(null);
+  const [display, setDisplay] = useState('0');
+  const [err, setErr] = useState(false);
+  const [done, setDone] = useState(false);
+  const [buttonName, setButtonName] = useState(null);
 
-  handleClick(value) {
-    let {
-      state: { total, next },
-    } = this;
-    const {
-      state: { operation, done },
-    } = this;
+  const reset = () => {
+    setTotal(null);
+    setNext(null);
+    setOperation(null);
+    setErr(false);
+    setDisplay(null);
+    setDone(false);
+  };
+
+  const updateDisplay = value => {
+    setTotal(value);
+    setDisplay(value);
+  };
+
+  const handleClick = value => {
+    if (err) {
+      reset();
+    }
     const numValue = parseInt(value, 10);
     if (value === '.') {
       if (total && !done) {
         if (!total.includes('.')) {
-          this.updateDisplay(value, () => {
-            this.display();
-          });
+          updateDisplay(`${total}${value}`);
         }
       } else {
         if (total && done && !operation) {
-          this.reset(() => {
-            this.display();
-          });
+          reset();
         }
         if (total && operation) {
-          this.updateDisplay('.', () => {
-            this.display();
-          });
+          updateDisplay(`${total}${value}`);
         } else {
-          this.updateDisplay('0.', () => {
-            this.display();
-          });
+          updateDisplay('0.');
         }
       }
     } else if (!Number.isNaN(numValue)) {
       if (done && !operation) {
-        this.reset(() => {
-          this.display();
-        });
+        reset();
+        updateDisplay(`${value}`);
+      } else if (total) {
+        updateDisplay(`${total}${value}`);
+      } else {
+        let displayValue = value;
+        if (buttonName) {
+          const parsedValue = parseNum(value);
+          displayValue = calculate(
+            {
+              total: parsedValue,
+              next,
+              operation,
+            },
+            buttonName,
+          );
+          setButtonName(null);
+        }
+        updateDisplay(`${displayValue}`);
       }
-      this.updateDisplay(value, () => {
-        this.display();
-      });
     } else if (value === 'AC') {
-      this.reset(() => {
-        this.display();
-      });
+      reset();
+      setDisplay('0');
     } else if (value === '+/-' || value === '%') {
-      if (total) {
-        total = parseNum(total);
+      if (value === '+/-' && operation && !total) {
+        setButtonName(value);
+      } else if (total) {
+        const parsedTotal = parseNum(total);
         const calcValue = calculate(
           {
-            total,
+            total: parsedTotal,
             next: null,
             operation,
           },
           value,
         );
-        this.setState({
-          done: true,
-          total: null,
-        });
-        this.updateDisplay(`${calcValue}`, () => {
-          this.display();
-        });
+        setDone(true);
+        updateDisplay(`${calcValue}`);
       } else if (next) {
-        next = parseNum(next);
+        const parsedNext = parseNum(next);
         const calcValue = calculate(
           {
             total: null,
-            next,
-            operation: null,
+            next: parsedNext,
+            operation,
           },
           value,
         );
-        this.setState({ next: `${calcValue}`, display: `${calcValue}` });
+        setNext(`${calcValue}`);
+        setDisplay(`${calcValue}`);
       }
     } else if (next && total) {
-      total = parseNum(total);
-      next = parseNum(next);
+      const parsedTotal = parseNum(total);
+      const parsedNext = parseNum(next);
       if (value === '=') {
         const calcValue = calculate({
-          total,
-          next,
+          total: parsedTotal,
+          next: parsedNext,
           operation,
         });
-        this.setState({
-          done: true,
-          total: null,
-          operation: null,
-          next: null,
-        });
-        this.updateDisplay(`${calcValue}`, () => {
-          this.display();
-        });
+        setDone(true);
+        setOperation(null);
+        setNext(null);
+        updateDisplay(`${calcValue}`);
       } else if (value !== '+/-' && value !== '%') {
         const calcValue = calculate({
           total,
           next,
           operation: value,
         });
-        this.setState({
-          next: `${calcValue}`,
-          total: null,
-        });
-        this.setState({
-          display: `${calcValue}`,
-        });
+        setNext(`${calcValue}`);
+        setTotal(null);
+        setDisplay(`${calcValue}`);
       }
-    } else if (total) {
-      this.setState(state => ({
-        next: state.total,
-        total: null,
-        operation: value,
-      }));
-    } else if (value !== '%' && value !== '=') {
-      this.setState({
-        err: true,
-      });
+    } else if (total && value !== '=') {
+      setNext(total);
+      setTotal(null);
+      setOperation(value);
+    } else if (value === '=') {
+      setOperation(null);
+    } else {
+      setErr(true);
     }
-  }
+  };
 
-  reset(callback) {
-    this.setState({
-      total: null,
-      next: null,
-      operation: null,
-      err: null,
-      display: null,
-      done: false,
-    });
-    callback();
-  }
+  return (
+    <>
+      <Display result={display} error={err} />
+      <ButtonGroups groups={buttonGroups()} onclick={handleClick} />
+    </>
+  );
+};
 
-  updateDisplay(value, callback) {
-    this.setState(
-      state => ({
-        total: state.total ? state.total + value : value,
-      }),
-      callback,
-    );
-  }
-
-  display() {
-    this.setState(state => ({
-      display: state.total ? state.total : '0',
-    }));
-  }
-
-  render() {
-    const {
-      state: { display, err },
-    } = this;
-    return (
-      <>
-        <Display result={display} error={err} />
-        <ButtonGroups groups={buttonGroups()} onclick={this.handleClick} />
-      </>
-    );
-  }
-}
+export default App;
