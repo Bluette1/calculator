@@ -2,7 +2,7 @@ import React from 'react';
 
 const NavBar = () => (
   <div className="navbar">
-    <h1>Math Magicians</h1>
+    <h2>Math Magicians</h2>
     <ul>
       <li><a href="/">Home</a></li>
       <li><a href="/calculator">Calc</a></li>

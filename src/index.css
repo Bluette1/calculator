@@ -1,5 +1,15 @@
 @import-normalize; /* bring in normalize.css styles */
 
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
   display: flex;
@@ -25,30 +35,43 @@ body {
 .navbar {
   display: flex;
   justify-content: space-between;
+  padding-top: 0;
+  margin-top: -10%;
 }
 
 .navbar ul {
   display: flex;
   flex-flow: row wrap;
   list-style-type: none;
+  padding-top: 2%;
 }
 
 .navbar li {
   flex-basis: auto;
   flex-grow: 1;
   width: 15%;
-  padding-right: 20px;
+  border-right: solid 1px;
 }
 
 .navbar li:nth-child(2) {
-  padding-left: 22px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.navbar li:first-child {
+  padding-right: 50px;
+}
+
+.navbar li:last-child {
+  border-right: none;
+  padding-left: 10px;
 }
 
 .home {
   text-align: justify;
 }
 
-.home h1 {
+.home h2 {
   text-align: center;
 }
 
