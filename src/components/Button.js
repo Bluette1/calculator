@@ -8,7 +8,7 @@ const Button = ({
   <button
     type="button"
     style={{
-      width: value === '0' ? '50%' : wide,
+      width: wide ? '50%' : '25%',
       backgroundColor: color,
     }}
     onClick={() => onclick(value)}

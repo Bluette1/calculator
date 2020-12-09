@@ -10,7 +10,7 @@ const ButtonPanel = props => {
     <div className="buttonGroup">
       {itemList.map(item => (
         <React.Fragment key={item}>
-          <Button value={item} onclick={handleClick} wide="25%" color={lastButtons.includes(item) ? undefined : '#f6f6f6'} />
+          <Button value={item} onclick={handleClick} wide={item === '0'} color={lastButtons.includes(item) ? undefined : '#f6f6f6'} />
         </React.Fragment>
       ))}
     </div>
