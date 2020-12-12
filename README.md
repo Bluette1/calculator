@@ -1,6 +1,6 @@
 # calculator
 
-[Linters](https://github.com/bluette1/calculator/workflows/Linters/badge.svg)
+![Linters](https://github.com/bluette1/calculator/workflows/Linters/badge.svg)
 
 ## Project description
 This project is an implementation of a basic 4-function calculator application using React.js.
