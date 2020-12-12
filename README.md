@@ -5,7 +5,7 @@
 ## Project description
 This project is an implementation of a basic 4-function calculator application using React.js.
 ## Screenshot
-![demo picture](./assets/screenshot.png)
+![demo picture](./public/screenshot.png)
 
 ## Built with
 - Javascript
