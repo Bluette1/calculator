@@ -1,4 +1,4 @@
-import calculate from '../src/logic/calculate';
+import calculate from '../logic/calculate';
 
 test('calculate - when buttonName equals `+/-` and total is set', () => {
   const calcObj = {
