@@ -5,14 +5,15 @@ import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import ButtonGroups from '../components/ButtonGroups';
 import buttonGroups from '../helpers/buttonGroups';
+import { shallow, mount } from "enzyme";
+import App from '../components/App';
+import Button from '../components/Button';
+import Display from '../components/Display';
+
 
 configure({ adapter: new Adapter() });
 
-import { shallow, mount } from "enzyme";
-import App from '../components/App';
-import Display from '../components/Display';
-
-it('renders the app', () => {
+it('renders the app with expected display component', () => {
   const app = mount(<App />);
   expect(app.find(".display").text()).toBe("0");
 });
@@ -41,9 +42,13 @@ it('renders button groups without crashing', () => {
 it('renders button groups with a functional `onclick` prop', () => {
   const div = document.createElement('div');
   const onClickSpy = jest.fn();
-  const itemList = [];
   const rendered = render(<ButtonGroups groups={buttonGroups()} onclick={onClickSpy} />, div);
   const incrementButton = rendered.getByText("+");
   fireEvent.click(incrementButton);
   expect(onClickSpy).toHaveBeenCalled();
+});
+
+it('renders the button component correctly', () => {
+  const btn = shallow(<Button value={'+'} />);
+  expect(btn.text()).toBe('+');
 });
