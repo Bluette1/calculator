@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`displays a link tag with the \`Calc\` text 1`] = `ReactWrapper {}`;
+
 exports[`displays a link tag with the \`Home\` text 1`] = `ReactWrapper {}`;
+
+exports[`displays a link tag with the \`Quote\` text 1`] = `ReactWrapper {}`;
 
 exports[`renders navbar with the correct text 1`] = `
 Object {
