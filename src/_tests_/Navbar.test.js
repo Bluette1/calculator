@@ -10,42 +10,43 @@ configure({ adapter: new Adapter() });
 
 afterEach(cleanup);
 
-afterEach(cleanup);
-
-it('renders without crashing', () => {
+it('renders navbar without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<NavBar />, div);
 });
 
-it('renders the correct heading', () => {
+it('renders the navbar with the correct heading', () => {
   const nav = mount(<NavBar />);
   expect(nav.find('h2').text()).toBe('Math Magicians');
+  expect(nav).toMatchSnapshot();
 });
 
-it('renders the correct text', () => {
+it('renders navbar with the correct text', () => {
   const div = document.createElement('div');
   const rendered = render(<NavBar />, div);
   expect(screen.getByText('Math Magicians')).toBeInTheDocument();
   expect(screen.getByText('Home')).toBeInTheDocument();
   expect(screen.getByText('Calc')).toBeInTheDocument();
   expect(rendered).toMatchSnapshot();
-
 });
 
-it("displays a link tag with the `Home` text", () => {
+it('displays a link tag with the `Home` text', () => {
   const nav = mount(<NavBar />);
   const link = nav.find('a').get(0);
   expect(link).toEqual(<a href="/">Home</a>);
+  expect(nav).toMatchSnapshot();
 });
 
-it("displays a link tag with the `Calc` text", () => {
+it('displays a link tag with the `Calc` text', () => {
   const nav = mount(<NavBar />);
   const link = nav.find('a').get(1);
   expect(link).toEqual(<a href="/calculator">Calc</a>);
+  expect(nav).toMatchSnapshot();
 });
 
-it("displays a link tag with the `Quote` text", () => {
+it('displays a link tag with the `Quote` text', () => {
   const nav = mount(<NavBar />);
   const link = nav.find('a').get(2);
   expect(link).toEqual(<a href="/quote">Quote</a>);
+  expect(nav).toMatchSnapshot();
 });

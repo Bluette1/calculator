@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders the correct text 1`] = `
+exports[`displays a link tag with the \`Home\` text 1`] = `ReactWrapper {}`;
+
+exports[`renders navbar with the correct text 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -122,3 +124,5 @@ Object {
   "unmount": [Function],
 }
 `;
+
+exports[`renders the navbar with the correct heading 1`] = `ReactWrapper {}`;
