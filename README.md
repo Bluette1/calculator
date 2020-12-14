@@ -1,6 +1,7 @@
 # calculator
 
 ![Linters](https://github.com/bluette1/calculator/workflows/Linters/badge.svg)
+![Test with jest](https://github.com/Bluette1/calculator/workflows/Test%20with%20jest/badge.svg)
 
 ## Project description
 This project is an implementation of a basic 4-function calculator application using React.js.
@@ -34,6 +35,11 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+- Documentation Sites on testing:
+  - [How to test routes using react router dom](https://techdoma.in/react-js-testing/how-to-test-routes-react-router-dom-in-react-using-jest-1)
+  - [Better testing with enzyme](https://www.newline.co/fullstack-react/30-days-of-react/day-25/)
+  - [Running tests - create react app](https://create-react-app.dev/docs/running-tests/)
 
 ### `yarn build`
 

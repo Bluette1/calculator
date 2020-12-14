@@ -8,7 +8,7 @@ const Display = props => {
   if (error) {
     display = '\u26A0';
   }
-  return <div className="display">{display}</div>;
+  return <div data-testid="display" className="display">{display}</div>;
 };
 Display.defaultProps = {
   result: '0',

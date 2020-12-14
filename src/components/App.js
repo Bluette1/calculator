@@ -24,9 +24,14 @@ const App = () => {
     setDone(false);
   };
 
-  const updateDisplay = value => {
-    setTotal(value);
-    setDisplay(value);
+  const updateDisplay = (value, append = false) => {
+    if (append) {
+      setTotal(prevTotal => prevTotal + value);
+      setDisplay(prevDisplay => prevDisplay + value);
+    } else {
+      setTotal(value);
+      setDisplay(value);
+    }
   };
 
   const handleClick = value => {
@@ -37,14 +42,14 @@ const App = () => {
     if (value === '.') {
       if (total && !done) {
         if (!total.includes('.')) {
-          updateDisplay(`${total}${value}`);
+          updateDisplay(`${value}`, true);
         }
       } else {
         if (total && done && !operation) {
           reset();
         }
         if (total && operation) {
-          updateDisplay(`${total}${value}`);
+          updateDisplay(`${value}`, true);
         } else {
           updateDisplay('0.');
         }
@@ -54,7 +59,7 @@ const App = () => {
         reset();
         updateDisplay(`${value}`);
       } else if (total) {
-        updateDisplay(`${total}${value}`);
+        updateDisplay(`${value}`, true);
       } else {
         let displayValue = value;
         if (buttonName) {
