@@ -1,40 +1,36 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { Route } from 'react-router-dom';
 import Routes from '../Routes';
 import App from '../components/App';
 import Quote from '../layouts/Quote';
 import Home from '../layouts/Home';
 import NotFound from '../layouts/NotFound';
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { MemoryRouter
-} from 'react-router'
-import { Route } from 'react-router-dom';
 
 configure({ adapter: new Adapter() });
 
 let pathMap = {};
 describe('routes using array of routers', () => {
   beforeAll(() => {
-    const component = shallow(<Routes/>);
-    pathMap = component.find(Route).reduce((pathMap, route) => {
-        const routeProps = route.props();
-        pathMap[routeProps.path] = routeProps.component;
-        return pathMap;
-      }, {});
-      console.log(pathMap)
-  })
-  it('should show Home component for / router (getting array of routes)', () => {
-
+    const component = shallow(<Routes />);
+    pathMap = component.find(Route).reduce((map, route) => {
+      const routeMap = map;
+      const routeProps = route.props();
+      routeMap[routeProps.path] = routeProps.component;
+      return routeMap;
+    }, {});
+  });
+  it('should show Home component for / route', () => {
     expect(pathMap['/']).toBe(Home);
-  })
-  it('should show App component for /news router', () => {
+  });
+  it('should show App component for /calculator route', () => {
     expect(pathMap['/calculator']).toBe(App);
-  })
-  it('should show Quote component techdomain for /news router', () => {
+  });
+  it('should show Quote component  for /quote route', () => {
     expect(pathMap['/quote']).toBe(Quote);
-  })
-  it('should show No  component for route not defined', ()=>{
-      expect(pathMap['undefined']).toBe(NotFound);
-  })
-})
+  });
+  it('should show NotFound o component for any route that is not defined', () => {
+    expect(pathMap.undefined).toBe(NotFound);
+  });
+});

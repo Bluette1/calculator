@@ -1,15 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render, screen, fireEvent, cleanup } from '@testing-library/react';
-import { configure } from 'enzyme';
+import {
+  render, screen, fireEvent, cleanup,
+} from '@testing-library/react';
+import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import '@testing-library/jest-dom';
-import ButtonGroups from '../components/ButtonGroups';
-import buttonGroups from '../helpers/buttonGroups';
-import { shallow, mount } from 'enzyme';
 import App from '../components/App';
-import Button from '../components/Button';
-import Display from '../components/Display';
 
 configure({ adapter: new Adapter() });
 
@@ -28,7 +25,7 @@ it('renders the app with expected display component', () => {
 
 it('renders app with button components', () => {
   const div = document.createElement('div');
-  const rendered = render(<App />, div)
+  const rendered = render(<App />, div);
   const addButton = rendered.getByText('+');
   fireEvent.click(addButton);
   expect(addButton).toBeDefined();
@@ -113,7 +110,6 @@ it('renders app with correct `%` function', () => {
   const percentButton = rendered.getByText('%');
   fireEvent.click(oneButton);
   fireEvent.click(percentButton);
-  const display = rendered.getByTestId('display');
   expect(screen.getByTestId('display')).toHaveTextContent('0.01');
   expect(rendered).toMatchSnapshot();
 });
