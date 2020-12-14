@@ -11,23 +11,18 @@ import Button from '../components/Button';
 import Display from '../components/Display';
 
 
-configure({ adapter: new Adapter() });
-
-it('renders the app with expected display component', () => {
-  const app = mount(<App />);
-  expect(app.find(".display").text()).toBe("0");
-  expect(app.find(".buttonGroup")).toBeDefined();
+it('renders button groups without crashing', () => {
+  const div = document.createElement('div');
+  const onClickSpy = jest.fn();
+  render(<ButtonGroups groups={buttonGroups()} onclick={onClickSpy} />, div);
+  expect(onClickSpy).not.toHaveBeenCalled();
 });
 
-it('renders without crashing', () => {
+it('renders button groups with a functional `onclick` prop', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-});
-
-it('renders app', () => {
-  const div = document.createElement('div');
-  const rendered = render(<App />, div);
+  const onClickSpy = jest.fn();
+  const rendered = render(<ButtonGroups groups={buttonGroups()} onclick={onClickSpy} />, div);
   const addButton = rendered.getByText("+");
   fireEvent.click(addButton);
-  expect(addButton).toBeDefined();
+  expect(onClickSpy).toHaveBeenCalled();
 });

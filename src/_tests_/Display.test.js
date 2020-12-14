@@ -10,24 +10,20 @@ import App from '../components/App';
 import Button from '../components/Button';
 import Display from '../components/Display';
 
-
-configure({ adapter: new Adapter() });
-
-it('renders the app with expected display component', () => {
-  const app = mount(<App />);
-  expect(app.find(".display").text()).toBe("0");
-  expect(app.find(".buttonGroup")).toBeDefined();
-});
-
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+  ReactDOM.render(<Display />, div);
 });
 
-it('renders app', () => {
-  const div = document.createElement('div');
-  const rendered = render(<App />, div);
-  const addButton = rendered.getByText("+");
-  fireEvent.click(addButton);
-  expect(addButton).toBeDefined();
+configure({ adapter: new Adapter() });
+it('renders the app and displays correct values', () => {
+  const display = mount(<Display />);
+  display.setProps({ result: '12' });
+  expect(display.find(".display").text()).toBe("12");
+});
+
+it('renders the app and displays correct values', () => {
+  const display = mount(<Display />);
+  display.setProps({ error: true });
+  expect(display.find(".display").text()).toBe('\u26A0');
 });
