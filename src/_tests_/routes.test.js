@@ -22,15 +22,22 @@ describe('routes using array of routers', () => {
     }, {});
   });
   it('should show Home component for / route', () => {
-    expect(pathMap['/']).toBe(Home);
+    const homePage = pathMap['/'];
+    expect(homePage).toBe(Home);
   });
   it('should show App component for /calculator route', () => {
-    expect(pathMap['/calculator']).toBe(App);
+    const calculatorPage = pathMap['/calculator'];
+    expect(calculatorPage).toBe(App);
+    expect(calculatorPage).toMatchSnapshot();
   });
   it('should show Quote component  for /quote route', () => {
-    expect(pathMap['/quote']).toBe(Quote);
+    const quotePage = pathMap['/quote'];
+    expect(quotePage).toBe(Quote);
+    expect(quotePage).toMatchSnapshot();
   });
-  it('should show NotFound o component for any route that is not defined', () => {
-    expect(pathMap.undefined).toBe(NotFound);
+  it('should show NotFound component for any route that is not defined', () => {
+    const unKnownPath = pathMap.undefined;
+    expect(unKnownPath).toBe(NotFound);
+    expect(unKnownPath).toMatchSnapshot();
   });
 });
