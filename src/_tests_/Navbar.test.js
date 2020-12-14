@@ -4,7 +4,6 @@ import { render, cleanup, screen } from '@testing-library/react';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import '@testing-library/jest-dom';
-import { Link } from "react-router";
 import NavBar from '../layouts/NavBar';
 
 configure({ adapter: new Adapter() });
@@ -36,17 +35,17 @@ it('renders the correct text', () => {
 it("displays a link tag with the `Home` text", () => {
   const nav = mount(<NavBar />);
   const link = nav.find('a').get(0);
-  expect(link.props['href']).toBe('/');
+  expect(link).toEqual(<a href="/">Home</a>);
 });
 
 it("displays a link tag with the `Calc` text", () => {
   const nav = mount(<NavBar />);
   const link = nav.find('a').get(1);
-  expect(link.props['href']).toBe('/calculator');
+  expect(link).toEqual(<a href="/calculator">Calc</a>);
 });
 
 it("displays a link tag with the `Quote` text", () => {
   const nav = mount(<NavBar />);
   const link = nav.find('a').get(2);
-  expect(link.props['href']).toBe('/quote');
+  expect(link).toEqual(<a href="/quote">Quote</a>);
 });
