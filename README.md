@@ -9,8 +9,7 @@ This project is an implementation of a basic 4-function calculator application u
 ![demo picture](./public/screenshot.png)
 
 ## Built with
-- Javascript
-- Webpack 
+- Javascript 
 - Javascript design patterns
 - Node.js
 - React.js
