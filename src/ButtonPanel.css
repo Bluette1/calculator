@@ -8,6 +8,6 @@
   .buttonGroup {
     display: flex;
     justify-content: space-evenly;
-    height: 80px;
+    height: 75px;
   }
 }

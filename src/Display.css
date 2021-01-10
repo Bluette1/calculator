@@ -7,10 +7,11 @@
   padding: 10px;
   color: rgb(255, 255, 255);
   font-weight: bold;
+  font-size: 30px;
 }
 
 @media (max-width: 400px) {
   .display {
-    height: 80px;
+    height: 75px;
   }
 }
