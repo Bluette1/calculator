@@ -3,3 +3,11 @@
   justify-content: space-evenly;
   height: 100px;
 }
+
+@media (max-width: 400px) {
+  .buttonGroup {
+    display: flex;
+    justify-content: space-evenly;
+    height: 80px;
+  }
+}
