@@ -16,7 +16,7 @@ This project is an implementation of a basic 4-function calculator application u
 - [Big.js](https://github.com/MikeMcl/big.js/)
 
 ## Deployed Site
-[Calculator App on Netlify](https://serene-carson-d576df.netlify.app/)
+[Calculator App on Netlify](https://i-calculate.netlify.app)
 
 ## Available Scripts
 
